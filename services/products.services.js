@@ -30,6 +30,7 @@ class ProductsService {
     this.#products.push(product);
     return product;
   }
+  
   async find() {
     return this.#products;
   }

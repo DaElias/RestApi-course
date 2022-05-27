@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Example fetch</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      #content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 1em;
+      }
+      .element {
+        margin: 5px;
+        background-color: cadetblue;
+        border-radius: 10px;
+        color: white;
+        padding: 5px;
+        width: 300px;
+        height: 100px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Example fetch</h1>
+    <div>
+      Numero de elementos server:
+      <b id="nelement"></b>
+    </div>
+    <button onclick="getData()">llamar datos</button>
+    <div class="container">
+      <input placeholder="name" id="nameItem" />
+      <input placeholder="price" id="priceItem" />
+      <button onclick="handleSubmit()">Submit</button>
+    </div>
+    <div class="container">
+      <div id="content"></div>
+    </div>
+  </body>
+  <script>
+    const nelement = document.getElementById("nelement");
+    const content = document.getElementById("content");
+    const nameItem = document.getElementById("nameItem");
+    const priceItem = document.getElementById("priceItem");
+
+    async function getData() {
+      const res = await fetch("http://localhost:3000/api/products/");
+      const data = await res.json();
+      const array = data.data || [];
+      nelement.innerText = data.count;
+      array.forEach((item) => addElements(item));
+    }
+
+    function handleSubmit() {
+      const name = nameItem.value;
+      const price = priceItem.value;
+      addElements({ name, price });
+      nameItem.value = "";
+      priceItem.value = "";
+    }
+
+    function addElements(item) {
+      const element = document.createElement("div");
+      element.className = "element";
+      const name = document.createElement("h1");
+      const price = document.createElement("h5");
+      name.innerText = "name: " + item.name;
+      price.innerText = "price: $" + item.price;
+      element.appendChild(name);
+      element.appendChild(price);
+      content.appendChild(element);
+    }
+
+    // main();
+  </script>
+</html>

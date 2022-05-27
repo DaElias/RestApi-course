@@ -42,6 +42,10 @@ router.patch(
   patchProductController
 );
 
-router.delete("/:id", deleteProductController);
+router.delete(
+  "/:id",
+  validatorHandler(getProductSchema, "params"),
+  deleteProductController
+);
 
 export default router;

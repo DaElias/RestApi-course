@@ -3,7 +3,7 @@ import ProductsService from "../services/products.services";
 const service = new ProductsService();
 
 const generarProductos = async (req, res) => {
-  const { limit = 15 } = req.query;
+  const { limit = 5 } = req.query;
   service.generate(limit);
   res.json({ data: await service.find(), count: service.lenght() });
 };
@@ -57,7 +57,6 @@ const patchProductController = (req, res) => {
     body,
   });
 };
-
 const deleteProductController = (req, res) => {
   const { id } = req.params;
   const product = service.delete(id);
