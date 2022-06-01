@@ -19,8 +19,8 @@ const corsOptions = {
     callback(new Error("Url no permitida!!"));
   },
 };
-app.use(cors(corsOptions));
-// app.use(cors());
+// app.use(cors(corsOptions));
+app.use(cors());
 // lectura y parceo del body
 app.use(express.json());
 // app.use(express.static("../public"));

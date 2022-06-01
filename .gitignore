@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos
 
 /node_modules/
-
+/postgres_data/
 ### Linux ###
 *~
 
