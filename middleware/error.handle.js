@@ -7,4 +7,4 @@ const boomHandleError = (err, req, res, next) => {
 };
 
 
-export { boomHandleError };
+module.exports = { boomHandleError };

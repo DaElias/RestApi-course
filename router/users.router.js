@@ -1,4 +1,4 @@
-import { Router } from "express";
+const { Router } = require("express");
 
 const router = Router();
 
@@ -13,4 +13,4 @@ router.get("/users", (req, res) => {
   res.json({ mgs: "no hay querys" });
 });
 
-export default router;
+module.exports = router;

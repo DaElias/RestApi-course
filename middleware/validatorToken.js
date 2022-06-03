@@ -1,8 +1,7 @@
-import boom from "@hapi/boom";
+const boom = require("@hapi/boom");
 
 const validatorToken = (req, res, next) => {
   if (req.body.auth !== "activate") throw boom.unauthorized();
   next();
 };
-
-export default validatorToken;
+module.exports = validatorToken;

@@ -1,23 +1,23 @@
-import { Router } from "express";
-import {
-  generarProductos,
+const { Router } = require("express");
+const {
   filterController,
   getProductByIdController,
   setProductController,
   updateProductController,
   patchProductController,
   deleteProductController,
-} from "../controller/products.controller";
-import validatorHandler from "../middleware/validatorHandler";
-import {
+  listaProductos,
+} = require("../controller/products.controller");
+const validatorHandler = require("../middleware/validatorHandler");
+const {
   createProductSchema,
   getProductSchema,
   uppdateProductSchema,
-} from "../schema/products";
+} = require("../schema/products");
 
 const router = Router();
 
-router.get("/", generarProductos);
+router.get("/", listaProductos);
 
 router.get("/filter", filterController);
 
@@ -48,4 +48,4 @@ router.delete(
   deleteProductController
 );
 
-export default router;
+module.exports = router;

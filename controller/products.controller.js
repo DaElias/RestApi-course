@@ -1,12 +1,14 @@
-import ProductsService from "../services/products.services";
+const ProductsService = require("../services/products.services");
 
 const service = new ProductsService();
 
-const generarProductos = async (req, res) => {
+const listaProductos = async (req, res) => {
   const { limit = 5 } = req.query;
-  service.generate(limit);
-  res.json({ data: await service.find(), count: service.lenght() });
+  const productos = await service.find();
+
+  res.json({ data: productos, count: service.lenght() });
 };
+
 
 const filterController = async (req, res) => {
   res.send("filter");
@@ -66,12 +68,12 @@ const deleteProductController = (req, res) => {
   });
 };
 
-export {
-  generarProductos,
+module.exports = {
   filterController,
   getProductByIdController,
   setProductController,
   updateProductController,
   patchProductController,
   deleteProductController,
+  listaProductos,
 };

@@ -1,25 +1,31 @@
-import { faker } from "@faker-js/faker";
-import boom from "@hapi/boom";
+const { faker } = require("@faker-js/faker");
+const boom = require("@hapi/boom");
+const pool = require("../libs/postgrest.pool");
 
 class ProductsService {
   #products = [];
+  #pool;
   constructor() {
     this.#products = [];
+    this.#pool = pool;
+    this.#pool.on("error", (error) => {
+      console.log(error);
+    });
   }
   lenght() {
     return this.#products.length;
   }
-  generate(limit) {
-    for (let index = 0; index < limit; index++) {
-      this.#products.push({
-        id: faker.datatype.uuid(),
-        name: faker.commerce.product(),
-        price: faker.commerce.price(),
-        url: faker.image.imageUrl(),
-        isBlock: faker.datatype.boolean(),
-      });
-    }
-  }
+  // generate(limit) {
+  //   for (let index = 0; index < limit; index++) {
+  //     this.#products.push({
+  //       id: faker.datatype.uuid(),
+  //       name: faker.commerce.product(),
+  //       price: faker.commerce.price(),
+  //       url: faker.image.imageUrl(),
+  //       isBlock: faker.datatype.boolean(),
+  //     });
+  //   }
+  // }
   async create({ name = "", price = "0.00" }) {
     const product = {
       id: faker.datatype.uuid(),
@@ -30,9 +36,15 @@ class ProductsService {
     this.#products.push(product);
     return product;
   }
-  
+
   async find() {
-    return this.#products;
+    try {
+
+      
+      return [];
+    } catch (error) {
+      throw boom.notFound();
+    }
   }
 
   async finOne(id) {
@@ -61,4 +73,4 @@ class ProductsService {
   }
 }
 
-export default ProductsService;
+module.exports = ProductsService;

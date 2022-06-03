@@ -1,7 +1,7 @@
-import { Router } from "express";
-import productsRouter from "./products.router";
-import userRouter from "./users.router";
-import categoriasRouter from "./categorisys.router";
+const { Router } = require("express");
+const productsRouter = require("./products.router");
+const userRouter = require("./users.router");
+const categoriasRouter = require("./categorisys.router");
 
 const RouterApi = (app) => {
   const router = Router();
@@ -11,4 +11,4 @@ const RouterApi = (app) => {
   router.use("/categories", categoriasRouter);
 };
 
-export { RouterApi };
+module.exports = { RouterApi };

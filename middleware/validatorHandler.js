@@ -1,4 +1,4 @@
-import boom from "@hapi/boom";
+const boom = require("@hapi/boom");
 //**Middleware dinamico */
 const validatorHandler = (schema, property) => (req, res, next) => {
   const data = req[property];
@@ -6,4 +6,4 @@ const validatorHandler = (schema, property) => (req, res, next) => {
   if (error) next(boom.badRequest(error));
   next();
 };
-export default validatorHandler;
+module.exports = validatorHandler;
